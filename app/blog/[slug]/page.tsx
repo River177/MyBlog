@@ -1,15 +1,10 @@
-import { Metadata } from 'next';
 import Link from 'next/link';
 import { getPostBySlug } from '../../lib/blog-posts';
 
-interface PageParams {
-  slug: string;
-}
-
-export default async function BlogPost({
-  params
+export default function BlogPost({
+  params,
 }: {
-  params: PageParams;
+  params: { slug: string };
 }) {
   const { slug } = params;
   const post = getPostBySlug(slug);
