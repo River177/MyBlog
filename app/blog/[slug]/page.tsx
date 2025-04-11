@@ -2,13 +2,14 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getPostBySlug } from '../../lib/blog-posts';
 
-type Props = {
+interface PageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default function BlogPost({ params }: Props) {
+export default function BlogPost({ params }: PageProps) {
   const { slug } = params;
   const post = getPostBySlug(slug);
 
