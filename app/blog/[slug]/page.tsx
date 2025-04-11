@@ -1,11 +1,17 @@
 import Link from 'next/link';
 import { getPostBySlug } from '../../lib/blog-posts';
 
+// 定义参数类型
+type Params = {
+  slug: string;
+};
+
+// 页面组件
 export default function BlogPost({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: Readonly<{
+  params: Params;
+}>) {
   const { slug } = params;
   const post = getPostBySlug(slug);
 
@@ -22,7 +28,7 @@ export default function BlogPost({
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto px-4 py-8">
       <Link href="/blog" className="text-blue-600 hover:underline mb-6 inline-block">
         &larr; 返回博客列表
       </Link>
