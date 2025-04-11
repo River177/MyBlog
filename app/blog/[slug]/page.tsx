@@ -1,13 +1,6 @@
 import Link from 'next/link';
 import { getPostBySlug, getAllPosts } from '../../lib/blog-posts';
 
-// 定义参数类型
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
 // 预生成静态路径
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -17,7 +10,11 @@ export async function generateStaticParams() {
 }
 
 // 页面组件
-export default function BlogPost({ params }: Props) {
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
   const post = getPostBySlug(slug);
 
