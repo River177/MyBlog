@@ -1,10 +1,11 @@
-'use client';
-
-import React from 'react';
 import Link from 'next/link';
 import { getPostBySlug } from '../../lib/blog-posts';
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
   const post = getPostBySlug(slug);
 
@@ -39,7 +40,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             } else if (line.startsWith('- ')) {
               return <li key={index} className="ml-6 my-1">{line.substring(2)}</li>;
             } else if (line.trim().startsWith('```')) {
-              return null; // 暂时忽略代码块开始和结束标记
+              return null;
             } else if (line.trim() === '') {
               return <br key={index} />;
             } else {
@@ -50,4 +51,4 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       </article>
     </div>
   );
-} 
+}
