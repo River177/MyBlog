@@ -1,17 +1,23 @@
 import Link from 'next/link';
-import { getPostBySlug } from '../../lib/blog-posts';
+import { getPostBySlug, getAllPosts } from '../../lib/blog-posts';
 
 // 定义参数类型
-type Params = {
-  slug: string;
+type Props = {
+  params: {
+    slug: string;
+  };
 };
 
+// 预生成静态路径
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 // 页面组件
-export default function BlogPost({
-  params,
-}: Readonly<{
-  params: Params;
-}>) {
+export default function BlogPost({ params }: Props) {
   const { slug } = params;
   const post = getPostBySlug(slug);
 
